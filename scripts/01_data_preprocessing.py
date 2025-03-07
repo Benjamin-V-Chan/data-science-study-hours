@@ -1,5 +1,17 @@
-# Load required libraries
-# Load the dataset
+import pandas as pd
+import os
+
+# Load dataset
+df = pd.read_csv("../data/score.csv")
+
 # Check for missing values
-# Handle any missing values (if applicable)
-# Save cleaned data to 'outputs/'
+df.dropna(inplace=True)
+
+# Ensure correct data types
+df["Hours"] = df["Hours"].astype(float)
+df["Scores"] = df["Scores"].astype(int)
+
+# Save cleaned dataset
+os.makedirs("../outputs/", exist_ok=True)
+df.to_csv("../outputs/cleaned_data.csv", index=False)
+print("Data preprocessing completed.")
